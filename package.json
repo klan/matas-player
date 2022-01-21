@@ -1,4 +1,18 @@
 {
+  "name": "matas-player",
+  "version": "1.0.0",
+  "main": "index.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klan/matas-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/klan/matas-player/issues"
+  },
+  "homepage": "https://github.com/klan/matas-player#readme",
   "dependencies": {
     "react": "^17.0.2",
     "video.js": "^7.17.0"
