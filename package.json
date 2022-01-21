@@ -1,8 +1,9 @@
 {
   "name": "matas-player",
   "version": "1.0.0",
-  "main": "index.tsx",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "dependencies": {
     "react": "^17.0.2",
     "video.js": "^7.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
   }
 }
