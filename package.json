@@ -1,5 +1,6 @@
 {
-  "devDependencies": {
+  "dependencies": {
+    "react": "^17.0.2",
     "video.js": "^7.17.0"
   }
 }
