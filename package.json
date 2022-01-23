@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "start:example": "webpack-dev-server --mode development --config example/webpack.config.js --history-api-fallback --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
