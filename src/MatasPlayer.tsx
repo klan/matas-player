@@ -1,14 +1,14 @@
-import React from 'react';
-import videojs from "video.js";
-import "video.js/dist/video-js.css";
+import React, { useRef, useEffect } from 'react';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
 
-export default function MatasPlayer(props: any): React.Component {
+export default function MatasPlayer(props: any): any {
     const { options, onReady } = props;
 
-    const videoRef = React.useRef(null);
-    const playerRef = React.useRef(null);
+    const videoRef = useRef(null);
+    const playerRef = useRef(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         // make sure Video.js player is only initialized once
         if (!playerRef.current) {
             const videoElement = videoRef.current;
@@ -27,7 +27,7 @@ export default function MatasPlayer(props: any): React.Component {
     }, [options, videoRef]);
     
     // Dispose the Video.js player when the functional component unmounts
-    React.useEffect(() => {
+    useEffect(() => {
         const player = playerRef.current;
     
         return () => {
