@@ -1,20 +1,32 @@
 import React, { useRef } from 'react';
 import MatasPlayer from '../src/MatasPlayer';
-import 'videojs-youtube/dist/Youtube.min.js';
+
+import 'videojs-youtube/dist/Youtube.min';
+import '@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm';
 
 export default function App() {
     const playerRef = useRef(null);
 
+    /**
+     * # Vimeo:
+     * "Big Buck Bunny": https://vimeo.com/1084537
+     * "730648 - prøvevideo": https://vimeo.com/518966582
+     * 
+     * # YouTube
+     * "Fjernsyn for dig": https://www.youtube.com/watch?v=LiCMLHBaMZI
+     */
+
     const videoJsOptions = {
-        autoplay: false,
+        autoplay: true,
         controls: true,
         responsive: true,
         fluid: true,
-        techOrder: ['youtube'],
+        techOrder: ['youtube', 'vimeo'],
         sources: [{
-            src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',
-            type: 'video/youtube'
-        }]
+            src: 'https://vimeo.com/518966582',
+            type: 'video/vimeo'
+        }],
+        vimeo: { color: "#042147" }
     };
 
     const handlePlayerReady = (player) => {
@@ -28,17 +40,16 @@ export default function App() {
         player.on('dispose', () => {
             console.log('player will dispose');
         });
-    };
 
-    // const changePlayerOptions = () => {
-    //   // you can update the player through the Video.js player instance
-    //   if (!playerRef.current) {
-    //     return;
-    //   }
-    //   // [update player through instance's api]
-    //   playerRef.current.src([{src: 'http://ex.com/video.mp4', type: 'video/mp4'}]);
-    //   playerRef.current.autoplay(false);
-    // };
+        player.on('ended', () => {
+            console.log('player has ended');
+
+            player.src([{
+                src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',
+                type: 'video/youtube'
+            }])
+        })
+    };
 
     return (
         <MatasPlayer options={videoJsOptions} onReady={handlePlayerReady} />
