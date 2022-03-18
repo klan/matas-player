@@ -1,1 +1,1 @@
-export * from './MatasPlayer';
+export { default } from './MatasPlayer';
