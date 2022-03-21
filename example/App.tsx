@@ -8,6 +8,10 @@ export default function App() {
     const playerRef = useRef(null);
 
     /**
+     * # Sources
+     * mp4: https://vjs.zencdn.net/v/oceans.mp4
+     * webm: https://vjs.zencdn.net/v/oceans.webm
+     * 
      * # Vimeo:
      * "Big Buck Bunny": https://vimeo.com/1084537
      * "730648 - prøvevideo": https://vimeo.com/518966582
@@ -17,22 +21,30 @@ export default function App() {
      */
 
     const videoJsOptions = {
-        autoplay: true,
+        // autoplay: true,
         controls: true,
-        responsive: true,
+        // responsive: true,
         fluid: true,
-        techOrder: ['youtube', 'vimeo'],
+        techOrder: ['html5', 'youtube', 'vimeo'],
         sources: [{
-            src: 'https://vimeo.com/518966582',
-            type: 'video/vimeo'
-        }],
-        vimeo: { color: "#042147" }
+            src: 'https://vjs.zencdn.net/v/oceans.mp4',
+            type: 'video/mp4'
+        }]
     };
+    // vimeo: { color: "#042147" }
 
     const handlePlayerReady = (player) => {
         playerRef.current = player;
 
-        // you can handle player events here
+        player.autoplay('muted');
+
+        player.addRemoteTextTrack({ src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1 });
+        player.addRemoteTextTrack({ src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' });
+
+        player.on('loadstart', () => {
+            console.log('loadstart');
+        });
+
         player.on('waiting', () => {
             console.log('player is waiting');
         });
@@ -43,6 +55,11 @@ export default function App() {
 
         player.on('ended', () => {
             console.log('player has ended');
+
+            const { tracks_: remoteTextTracks } = player.remoteTextTracks();
+            remoteTextTracks.forEach(track => {
+                player.removeRemoteTextTrack(track);
+            });
 
             player.src([{
                 src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',

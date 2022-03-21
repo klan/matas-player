@@ -7,8 +7,11 @@ module.exports = {
     entry: path.resolve(__dirname, './index.tsx'),
     mode: "development",
     devServer: {
-    static: path.join(__dirname, "dist"),
-    port: 3000
+        static: {
+            directory: path.join(__dirname, "captions"),
+            publicPath: "/captions"
+        },
+        port: 3000
     },
     module: {
         rules: [
