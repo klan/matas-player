@@ -1,10 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, './index.tsx'),
+    output: {
+        path: path.resolve(process.cwd(), 'dist'),
+    },
     mode: "development",
     devServer: {
         static: {
@@ -31,26 +34,17 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
-            },
-        //   {
-        //     test: /\.(png|svg|jpg|gif)$/,
-        //     use: [
-        //       'file-loader'
-        //     ]
-        //   }
+            }
         ]
     },
     resolve: {
         extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './index.html'),
             inject: 'body'
-        }),
-        // clean dist folder
-        // new CleanWebpackPlugin(['dist'], {
-        //   'verbose': true // write logs to console
-        // })
+        })
     ]
 };
