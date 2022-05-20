@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import { IMatasPlayer } from './interfaces';
 
-export default function MatasPlayer(props: any): any {
+export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     const { options, onReady } = props;
 
     const videoRef = useRef(null);
