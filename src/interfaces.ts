@@ -7,7 +7,7 @@ interface ICaption {
     src: string;
     srclang: string;
     label: string;
-    default: number;
+    default?: number;
 }
 
 export interface IMatasPlayer {
