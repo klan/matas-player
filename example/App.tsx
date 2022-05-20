@@ -34,33 +34,37 @@ export default function App() {
     // vimeo: { color: "#042147" }
 
     const handlePlayerReady = (player) => {
+        console.info('player ready');
         playerRef.current = player;
 
+        // configure
         player.autoplay('muted');
-
         player.addRemoteTextTrack({ src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1 });
         player.addRemoteTextTrack({ src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' });
 
+        /* events */
         player.on('loadstart', () => {
-            console.log('loadstart');
+            console.info('loadstart');
         });
 
         player.on('waiting', () => {
-            console.log('player is waiting');
+            console.info('player is waiting');
         });
 
         player.on('dispose', () => {
-            console.log('player will dispose');
+            console.info('player will dispose');
         });
 
         player.on('ended', () => {
-            console.log('player has ended');
+            console.info('player has ended');
 
+            // cleanup
             const { tracks_: remoteTextTracks } = player.remoteTextTracks();
             remoteTextTracks.forEach(track => {
                 player.removeRemoteTextTrack(track);
             });
 
+            // start end video
             player.src([{
                 src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',
                 type: 'video/youtube'
