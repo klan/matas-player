@@ -21,26 +21,21 @@ export default function App() {
      */
 
     const videoJsOptions = {
-        // autoplay: true,
-        controls: true,
-        // responsive: true,
-        fluid: true,
+        autoplay: true,
         techOrder: ['html5', 'youtube', 'vimeo'],
-        sources: [{
-            src: 'https://vjs.zencdn.net/v/oceans.mp4',
-            type: 'video/mp4'
-        }]
+        sources: [
+            { src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }
+        ],
+        captions: [
+            { src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1},
+            { src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' }
+        ]
     };
     // vimeo: { color: "#042147" }
 
     const handlePlayerReady = (player) => {
         console.info('player ready');
         playerRef.current = player;
-
-        // configure
-        player.autoplay('muted');
-        player.addRemoteTextTrack({ src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1 });
-        player.addRemoteTextTrack({ src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' });
 
         /* events */
         player.on('loadstart', () => {
