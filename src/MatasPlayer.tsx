@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import { IMatasPlayer } from './interfaces';
+import registerTitleBar from './components/TitleBar'
 
 export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     const { options, onReady } = props;
@@ -49,7 +50,13 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
         }
 
         /* OPTIONS */
-        player.autoplay(options.autoplay ? 'muted' : false);
+        player.autoplay(options.autoplay ? "muted" : false);
+
+        /**
+         * Components guide: https://videojs.com/guides/components/
+         * Component Class docs: https://docs.videojs.com/component
+         */
+        registerTitleBar(videojs, player);
     }, [options, videoRef]);
 
     // Dispose the Video.js player when the functional component unmounts
