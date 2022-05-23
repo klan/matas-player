@@ -8,20 +8,35 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     const { options, onReady } = props;
     const { captions, ...rest } = options;
     console.log({ options });
-    
+
+    const disabledComponents = ['controlBar', 'bigPlayButton', 'loadingSpinner'];
+
     const defaultOptions = {
+        ...disabledComponents.reduce((accumulator, component) => (
+            { ...accumulator, [component]: false }
+        ), {}),
         controls: true,
+        // children: [
+        // //   "tech",
+        //   "bigPlayButton",
+        //   "controlBar",
+        //   "poster",
+        //   "loadingSpinner",
+        //   "textTrackDisplay",
+        //   "errorDisplay",
+        //   "modaldialog",
+        // ],
         responsive: true,
         breakpoints: {
-            // tiny: 210, // 0-210
-            xsmall: 320, // 211-320
-            small: 680, // 321-680
-            medium: 960, // 681-960
-            large: 1280, // 961-1280
-            xlarge: 1920 // 1281-1920
-            // huge: 1921 // 1921+
+        // tiny: 210, // 0-210
+        xsmall: 320, // 211-320
+        small: 680, // 321-680
+        medium: 960, // 681-960
+        large: 1280, // 961-1280
+        xlarge: 1920 // 1281-1920
+        // huge: 1921 // 1921+
         }
-    }
+    };
 
     // console.log('options: ', { ...defaultOptions, ...rest });
 
