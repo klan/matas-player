@@ -16,6 +16,6 @@ export interface IMatasPlayer {
         techOrder: string[];
         sources: ISource[];
         captions?: ICaption[];
-    }
+    };
     onReady: (playerInstance) => void;
 }

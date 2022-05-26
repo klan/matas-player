@@ -11,11 +11,11 @@ export default function App() {
      * # Sources
      * mp4: https://vjs.zencdn.net/v/oceans.mp4
      * webm: https://vjs.zencdn.net/v/oceans.webm
-     * 
+     *
      * # Vimeo:
      * "Big Buck Bunny": https://vimeo.com/1084537
      * "730648 - prøvevideo": https://vimeo.com/518966582
-     * 
+     *
      * # YouTube
      * "Fjernsyn for dig": https://www.youtube.com/watch?v=LiCMLHBaMZI
      */
@@ -23,11 +23,9 @@ export default function App() {
     const videoJsOptions = {
         autoplay: true,
         techOrder: ['html5', 'youtube', 'vimeo'],
-        sources: [
-            { src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }
-        ],
+        sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
         captions: [
-            { src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1},
+            { src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1 },
             { src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' }
         ]
     };
@@ -55,19 +53,20 @@ export default function App() {
 
             // cleanup
             const { tracks_: remoteTextTracks } = player.remoteTextTracks();
-            remoteTextTracks.forEach(track => {
+            remoteTextTracks.forEach((track) => {
                 player.removeRemoteTextTrack(track);
             });
 
             // start end video
-            player.src([{
-                src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',
-                type: 'video/youtube'
-            }])
-        })
+            player.src([
+                {
+                    src: 'https://www.youtube.com/watch?v=LiCMLHBaMZI',
+                    type: 'video/youtube'
+                }
+            ]);
+        });
     };
 
-    return (
-        <MatasPlayer options={videoJsOptions} onReady={handlePlayerReady} />
-    );
+    return <MatasPlayer options={videoJsOptions} onReady={handlePlayerReady} />;
 }
+

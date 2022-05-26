@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import { IMatasPlayer } from './interfaces';
-import registerTitleBar from './components/TitleBar'
+import registerTitleBar from './components/TitleBar';
 
 export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     const { options, onReady } = props;
@@ -12,9 +12,7 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     const disabledComponents = ['controlBar', 'bigPlayButton', 'loadingSpinner'];
 
     const defaultOptions = {
-        ...disabledComponents.reduce((accumulator, component) => (
-            { ...accumulator, [component]: false }
-        ), {}),
+        ...disabledComponents.reduce((accumulator, component) => ({ ...accumulator, [component]: false }), {}),
         controls: true,
         // children: [
         // //   "tech",
@@ -28,13 +26,13 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
         // ],
         responsive: true,
         breakpoints: {
-        // tiny: 210, // 0-210
-        xsmall: 320, // 211-320
-        small: 680, // 321-680
-        medium: 960, // 681-960
-        large: 1280, // 961-1280
-        xlarge: 1920 // 1281-1920
-        // huge: 1921 // 1921+
+            // tiny: 210, // 0-210
+            xsmall: 320, // 211-320
+            small: 680, // 321-680
+            medium: 960, // 681-960
+            large: 1280, // 961-1280
+            xlarge: 1920 // 1281-1920
+            // huge: 1921 // 1921+
         }
     };
 
@@ -54,7 +52,7 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
                 onReady && onReady(player);
 
                 /* POST-READY OPTIONS */
-                captions.forEach(caption => player.addRemoteTextTrack(caption));
+                captions.forEach((caption) => player.addRemoteTextTrack(caption));
                 // console.log(player.remoteTextTracks());
             });
         } else {
@@ -65,7 +63,7 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
         }
 
         /* OPTIONS */
-        player.autoplay(options.autoplay ? "muted" : false);
+        player.autoplay(options.autoplay ? 'muted' : false);
 
         /**
          * Components guide: https://videojs.com/guides/components/
@@ -77,7 +75,7 @@ export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
     // Dispose the Video.js player when the functional component unmounts
     useEffect(() => {
         const player = playerRef.current;
-    
+
         return () => {
             if (player) {
                 player.dispose();
