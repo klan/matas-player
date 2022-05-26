@@ -1,3 +1,7 @@
+import React from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+
 export default function registerTitleBar(videojs, player) {
     // Get the Component base class from Video.js
     var Component = videojs.getComponent('Component');
@@ -30,8 +34,8 @@ export default function registerTitleBar(videojs, player) {
             });
         },
 
-        // This function could be called at any time to update the text
-        // contents of the component.
+        // // This function could be called at any time to update the text
+        // // contents of the component.
         updateTextContent: function (text) {
             // If no text was provided, default to "Title Unknown"
             if (typeof text !== 'string') {
@@ -41,7 +45,12 @@ export default function registerTitleBar(videojs, player) {
             // Use Video.js utility DOM methods to manipulate the content
             // of the component's element.
             videojs.emptyEl(this.el());
-            videojs.appendContent(this.el(), text);
+            // videojs.appendContent(this.el(), text);
+
+            const root = this.el();
+            render(<Hello text={text} />, root);
+
+            videojs.appendContent(root, null);
         }
     });
 
