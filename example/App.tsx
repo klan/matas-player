@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import MatasPlayer from '../src/MatasPlayer';
-
 import 'videojs-youtube/dist/Youtube.min';
 import '@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm';
 
@@ -24,8 +23,8 @@ export default function App() {
         autoplay: true,
         techOrder: ['html5', 'youtube', 'vimeo'],
         sources: [{ src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' }],
-        captions: [
-            { src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: 1 },
+        tracks: [
+            { src: './captions/oceans-captions_en.vtt', srclang: 'en', label: 'English', default: true },
             { src: './captions/oceans-captions_da.vtt', srclang: 'da', label: 'Dansk' }
         ]
     };
@@ -50,12 +49,6 @@ export default function App() {
 
         player.on('ended', () => {
             console.info('player has ended');
-
-            // cleanup
-            const { tracks_: remoteTextTracks } = player.remoteTextTracks();
-            remoteTextTracks.forEach((track) => {
-                player.removeRemoteTextTrack(track);
-            });
 
             // start end video
             player.src([

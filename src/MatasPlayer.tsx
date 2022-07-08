@@ -1,13 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import videojs from 'video.js';
+import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 import 'video.js/dist/video-js.css';
-import { IMatasPlayer } from './interfaces';
+import type { IMatasPlayer } from './interfaces';
 import registerTitleBar from './components/TitleBar';
 
 export default function MatasPlayer(props: IMatasPlayer) {
     const { options, onReady } = props;
-    const { captions, ...rest } = options;
-    console.log({ options });
+    const { tracks, ...rest } = options;
+    // console.log({ options });
 
     const disabledComponents = ['controlBar', 'bigPlayButton', 'loadingSpinner'];
 
@@ -36,24 +37,26 @@ export default function MatasPlayer(props: IMatasPlayer) {
         }
     };
 
-    // console.log('options: ', { ...defaultOptions, ...rest });
-
-    const videoRef = useRef(null);
-    const playerRef = useRef(null);
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const playerRef = useRef<VideoJsPlayer | null>(null);
 
     useEffect(() => {
-        let player;
+        let player: VideoJsPlayer;
         if (!playerRef.current) {
             // initialize
             const videoElement = videoRef.current;
             if (!videoElement) return;
 
-            player = playerRef.current = videojs(videoElement, { ...defaultOptions, ...rest }, () => {
+            const initOptions: VideoJsPlayerOptions = { ...defaultOptions, ...rest };
+
+            player = playerRef.current = videojs(videoElement, initOptions, () => {
                 onReady && onReady(player);
 
-                /* POST-READY OPTIONS */
-                captions.forEach((caption) => player.addRemoteTextTrack(caption));
-                // console.log(player.remoteTextTracks());
+                if (tracks) {
+                    // add tracks after ready
+                    tracks.forEach((track) => player.addRemoteTextTrack(track, false));
+                    console.log(player.remoteTextTracks());
+                }
             });
         } else {
             // update
@@ -63,13 +66,13 @@ export default function MatasPlayer(props: IMatasPlayer) {
         }
 
         /* OPTIONS */
-        player.autoplay(options.autoplay ? 'muted' : false);
+        playerRef.current.autoplay(options.autoplay ? 'muted' : false);
 
         /**
          * Components guide: https://videojs.com/guides/components/
          * Component Class docs: https://docs.videojs.com/component
          */
-        registerTitleBar(videojs, player);
+        registerTitleBar(videojs, playerRef.current);
     }, [options, videoRef]);
 
     // Dispose the Video.js player when the functional component unmounts
