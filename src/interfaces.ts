@@ -1,21 +1,6 @@
-interface ISource {
-    src: string;
-    type: string;
-}
-
-interface ICaption {
-    src: string;
-    srclang: string;
-    label: string;
-    default?: number;
-}
+import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
 
 export interface IMatasPlayer {
-    options: {
-        autoplay: boolean;
-        techOrder: string[];
-        sources: ISource[];
-        captions?: ICaption[];
-    };
-    onReady: (playerInstance) => void;
+    options: VideoJsPlayerOptions;
+    onReady: (playerInstance: VideoJsPlayer) => void;
 }

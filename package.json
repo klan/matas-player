@@ -18,6 +18,7 @@
   "homepage": "https://github.com/klan/matas-player#readme",
   "dependencies": {
     "@devmobiliza/videojs-vimeo": "^0.6.0",
+    "@types/video.js": "^7.3.42",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "video.js": "^7.17.0",
@@ -28,6 +29,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@types/react": "^18.0.15",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
