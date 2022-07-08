@@ -4,7 +4,7 @@ import 'video.js/dist/video-js.css';
 import { IMatasPlayer } from './interfaces';
 import registerTitleBar from './components/TitleBar';
 
-export default function MatasPlayer(props: IMatasPlayer): JSX.Element {
+export default function MatasPlayer(props: IMatasPlayer) {
     const { options, onReady } = props;
     const { captions, ...rest } = options;
     console.log({ options });

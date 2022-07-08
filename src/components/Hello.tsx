@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Hello(props): JSX.Element {
+export default function Hello(props) {
     const { text } = props;
 
     function handleClick() {

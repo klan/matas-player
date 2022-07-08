@@ -4,12 +4,12 @@ import Hello from './Hello';
 
 export default function registerTitleBar(videojs, player) {
     // Get the Component base class from Video.js
-    var Component = videojs.getComponent('Component');
+    const Component = videojs.getComponent('Component');
 
     // The videojs.extend function is used to assist with inheritance. In
     // an ES6 environment, `class TitleBar extends Component` would work
     // identically.
-    var TitleBar = videojs.extend(Component, {
+    const TitleBar = videojs.extend(Component, {
         // The constructor of a component receives two arguments: the
         // player it will be associated with and an object of options.
         constructor: function (player, options) {
@@ -30,12 +30,12 @@ export default function registerTitleBar(videojs, player) {
                 // Prefixing classes of elements within a player with "vjs-"
                 // is a convention used in Video.js.
                 className: 'vjs-title-bar',
-                style: 'color: black;'
+                style: 'color: red;'
             });
         },
 
-        // // This function could be called at any time to update the text
-        // // contents of the component.
+        // This function could be called at any time to update the text
+        // contents of the component.
         updateTextContent: function (text) {
             // If no text was provided, default to "Title Unknown"
             if (typeof text !== 'string') {
